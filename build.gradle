@@ -1,5 +1,5 @@
 
 task generateSql(type: CodeGeneratorTask) {
-    srcDir = 'src/main/resources'
+    srcDir = 'src/main/resources/scripts'
     sqlDir = 'build/classes/resources'
 }
