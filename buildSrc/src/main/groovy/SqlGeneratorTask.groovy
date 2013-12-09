@@ -2,23 +2,22 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import groovy.io.FileType
 
-class CodeGeneratorTask extends DefaultTask {
-  def srcDir
-  def sqlDir
+class SqlGeneratorTask extends DefaultTask {
+  def csvDir
   def defaultExt = '.csv'
-  
+	
+	 
   @TaskAction
   def generateSql() {
-    println "Generating Scripts from ${srcDir}"
-    println "Placing them in ${sqlDir}"
+    println "Generating Scripts from ${csvDir}"
     
-    def dir = new File(srcDir)
+		def dir = new File(csvDir)
+		def f = new File("${csvDir}/sql/create_database_script.sql")
+ 
     dir.eachFileMatch(~/.*?\.csv/){ file -> 
       
       //table name is file name
       def tableName = file.name - defaultExt
-      
-      File f = new File("${srcDir}\\${tableName}.sql")
       
       //start writing the script
       f.write("--SQL Script for table ${tableName}\n")
@@ -34,8 +33,8 @@ class CodeGeneratorTask extends DefaultTask {
         f.append("${buildColumnScript(it)},\n\t")
       }
       
-      f.append(buildColumnScript(lastRow))
-      f.append(");");
+        f.append(buildColumnScript(lastRow))
+      f.append("\n);\n\n");
     }
   }
   
@@ -44,6 +43,6 @@ class CodeGeneratorTask extends DefaultTask {
     r.tokenize(',').each{
       str += "${it}\t"
     }
-    return str
+    return str.trim()
   }
 }

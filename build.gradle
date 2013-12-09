@@ -1,5 +1,17 @@
 
-task generateSql(type: CodeGeneratorTask) {
-    srcDir = 'src/main/resources/scripts'
-    sqlDir = 'build/classes/resources'
+//configuration
+def csv = 'src/main/resources/scripts'
+
+//dao classes path
+def daoClassesPath = 'src/main/java/com/nma/mynetworth/dao/'
+
+
+task generateSql(type: SqlGeneratorTask) {
+  csvDir = csv
+}
+
+task generateClasses(type: DAOGeneratorTask) {
+	csvDir = csv
+  daoPath = daoClassesPath
+	modelPath = daoPath + '/model'
 }
