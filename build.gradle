@@ -13,5 +13,5 @@ task generateSql(type: SqlGeneratorTask) {
 task generateClasses(type: DAOGeneratorTask) {
 	csvDir = csv
   daoPath = daoClassesPath
-	modelPath = daoPath + '/model'
+	modelPath = daoPath + 'model'
 }

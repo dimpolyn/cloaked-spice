@@ -12,6 +12,7 @@ class SqlGeneratorTask extends DefaultTask {
     println "Generating Scripts from ${csvDir}"
     
 		def dir = new File(csvDir)
+		def sqlDir = new File("${csvDir}/sql").mkdir()
 		def f = new File("${csvDir}/sql/create_database_script.sql")
  
     dir.eachFileMatch(~/.*?\.csv/){ file -> 
