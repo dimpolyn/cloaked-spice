@@ -1,4 +1,6 @@
 
+apply plugin: 'java'
+
 //configuration
 def csv = 'src/main/resources/scripts'
 
@@ -14,4 +16,9 @@ task generateClasses(type: DAOGeneratorTask) {
 	csvDir = csv
   daoPath = daoClassesPath
 	modelPath = daoPath + 'model'
+}
+
+dependencies {
+	runtime 'com.j256.ormlite:ormlite-core:4.47',
+					'com.j256.ormlite:ormlite-jdbc:4.47'
 }

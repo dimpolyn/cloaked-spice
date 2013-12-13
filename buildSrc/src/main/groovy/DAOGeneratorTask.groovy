@@ -83,7 +83,7 @@ class DAOGeneratorTask extends DefaultTask {
 		def dataType = classMapping."${r[1]}"
 		def value = convertToLowerCamelCase(r[0])
 		def str = "\n\tpublic void set${convertToUpperCamelCase(r[0])}($dataType $value){\n"
-		str += "\t\treturn this.$value = $value;\n"
+		str += "\t\tthis.$value = $value;\n"
 		str += "\t}\n"
 	}
 	
@@ -98,12 +98,7 @@ class DAOGeneratorTask extends DefaultTask {
 	}
 	
 	def convertToUpperCamelCase(str){
-		str = str.toLowerCase().tokenize('_')
-		
-		def name = str.remove(0).capitalize()
-		str.each{
-			name += it.capitalize()
-		}		
+		def name = convertToLowerCamelCase(str).capitalize()
 		return name
 	}
 }
